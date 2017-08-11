@@ -1,0 +1,5 @@
+@media print {
+    h1, h2, .well {
+        display: none;
+    }
+}
