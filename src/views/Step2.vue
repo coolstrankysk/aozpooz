@@ -237,6 +237,8 @@
           component: this.selectedComponent
         })
 
+        this.editButton = false
+
         this.resetSelectedComponent()
       },
 
