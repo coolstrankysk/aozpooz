@@ -12,8 +12,6 @@
                     <div class="evaluated" v-if="selectedComponents.length">
                         <h3>Posúdené poruchy</h3>
 
-                        <h3>Ciastony zapis</h3>
-
                         <div v-for="(selectedComponent, index) in selectedComponents">
                             {{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
                             {{ selectedComponent.scaleComponent.component }} -
