@@ -40,11 +40,11 @@
             		<h3>Posúdené poruchy</h3>
             		
             		<div v-for="selectedComponent in selectedComponents">
-		        		{{ selectedComponent.scaleComponent.key }} - 
-		        		{{ selectedComponent.scaleComponent.component }} -
-		        		<span v-for="selectedScale in selectedComponent.selectedScales">
-		        			{{ selectedScale.value }}
-		        		</span>
+						{{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
+						{{ selectedComponent.scaleComponent.component }} -
+						<span v-for="(selectedScale, index) in selectedComponent.selectedScales">
+							{{ selectedScale.value }}
+						</span>
 		        	</div>
             	</div>
         	</div>

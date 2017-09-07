@@ -14,17 +14,21 @@
 
                         <h3>Ciastony zapis</h3>
 
-                        <div v-for="selectedComponent in selectedComponents">
-                            {{ selectedComponent.scaleComponent.key }} -
+                        <div v-for="(selectedComponent, index) in selectedComponents">
+                            {{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
                             {{ selectedComponent.scaleComponent.component }} -
-                            <span v-for="selectedScale in selectedComponent.selectedScales">
+                            <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
 			        		</span>
-                            <span class="glyphicon glyphicon-pencil text-warning" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-pencil text-warning"
+                                  @click="editComponents(key)"
+                                  aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-remove text-danger"
+                                  @click="removeComponents(key)"
+                                  aria-hidden="true"></span>
                         </div>
 
-                        <!-- Full -->
+                        <!-- Full
 
                         <h3>Full zapis</h3>
 
@@ -45,7 +49,7 @@
                             <span class="glyphicon glyphicon-remove text-danger"
                                   @click="removeComponents(key)"
                                   aria-hidden="true"></span>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div id="components">
@@ -86,6 +90,7 @@
                                     <input type="radio"
                                            :name="keys"
                                            :value="scale"
+                                           :data-key="key"
                                            @change="showSaveButton"> <strong>{{ scale }}</strong>
                                 </div>
                             </div>
@@ -95,6 +100,7 @@
                                     <input type="radio"
                                            :name="keys"
                                            :value="scale"
+                                           :data-key="key"
                                            @change="showSaveButton"> <strong>{{ scale }}</strong>
                                 </div>
                             </div>
@@ -178,8 +184,11 @@
 
         this.selectedComponent.selectedScales.push({
           name: e.target.name,
-          value: e.target.value
+          value: e.target.value,
+          key: e.target.attributes['data-key'].value
         })
+
+        console.log(this.selectedComponent.selectedScales)
       },
 
       deleteSelectedComponent () {
