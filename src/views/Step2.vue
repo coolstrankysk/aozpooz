@@ -219,8 +219,6 @@
 
         this.selectedComponent = this.selectedComponents[key]
 
-        this.$store.commit('spliceSelectedComponents', key)
-
         this.editButton = true
 
         this.showScales = true
