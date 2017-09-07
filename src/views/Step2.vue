@@ -81,15 +81,12 @@
 
                             <h4>{{ keys }}</h4>
 
-                            <div v-if="selectedComponent.selectedScales.length">
+                            <div v-if="selectedComponent.selectedScales.length && editButton">
                                 <div v-for="(scale, key) in scales">
-                                    <template v-for="test in selectedComponent.selectedScales">
-                                        <input type="radio"
-                                               :name="keys"
-                                               :value="scale"
-                                               :checked="test.value == scale"
-                                               @change="showSaveButton"> <strong>{{ scale }}</strong>
-                                    </template>
+                                    <input type="radio"
+                                           :name="keys"
+                                           :value="scale"
+                                           @change="showSaveButton"> <strong>{{ scale }}</strong>
                                 </div>
                             </div>
 
