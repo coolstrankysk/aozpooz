@@ -12,42 +12,19 @@
                     <div class="evaluated" v-if="selectedComponents.length">
                         <h3>Posúdené poruchy</h3>
 
-                        <div v-for="(selectedComponent, index) in selectedComponents">
+                        <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
                             {{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
                             {{ selectedComponent.scaleComponent.component }} -
                             <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
 			        		</span>
                             <span class="glyphicon glyphicon-pencil text-warning"
-                                  @click="editComponents(key)"
+                                  @click="editComponents(selectedComponentIndex)"
                                   aria-hidden="true"></span>
                             <span class="glyphicon glyphicon-remove text-danger"
-                                  @click="removeComponents(key)"
+                                  @click="removeComponents(selectedComponentIndex)"
                                   aria-hidden="true"></span>
                         </div>
-
-                        <!-- Full
-
-                        <h3>Full zapis</h3>
-
-                        <div v-for="(selectedComponent, key) in selectedComponents">
-                            {{ selectedComponent.name }} -
-                            <span v-for="components in selectedComponent.selectedComponents">
-			        			{{ components }} -
-			        		</span>
-                            {{ selectedComponent.scaleComponent.key }}
-                            {{ selectedComponent.scaleComponent.component }} -
-                            <span v-for="selectedScale in selectedComponent.selectedScales">
-			        			{{ selectedScale.name }} -
-			        			{{ selectedScale.value }}
-			        		</span>
-                            <span class="glyphicon glyphicon-pencil text-warning"
-                                  @click="editComponents(key)"
-                                  aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-remove text-danger"
-                                  @click="removeComponents(key)"
-                                  aria-hidden="true"></span>
-                        </div>-->
                     </div>
 
                     <div id="components">
@@ -185,8 +162,6 @@
           value: e.target.value,
           key: e.target.attributes['data-key'].value
         })
-
-        console.log(this.selectedComponent.selectedScales)
       },
 
       deleteSelectedComponent () {
