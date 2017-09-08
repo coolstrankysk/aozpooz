@@ -13,7 +13,7 @@
                         <h3>Posúdené poruchy</h3>
 
                         <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
-                            {{ selectedComponent.scaleComponent.key }}.<span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key }}</span> -
+                            {{ selectedComponent.scaleComponent.key }}<span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.keys === 'Debariérizátor' ? '+' : '.' }}</span><span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key }}</span> -
                             {{ selectedComponent.scaleComponent.component }} -
                             <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
@@ -55,28 +55,66 @@
                             </template>
                         </select>
 
-                        <div v-if="showScales"
+                        <div class="scales" v-if="showScales"
                              v-for="(scales, keys) in selectedComponent.scales">
 
-                            <h4>{{ keys }}</h4>
+                            <div v-if="keys === 'Bariéra' || keys === 'Debariérizátor'">
+                                <h4>{{ keys }}</h4>
 
-                            <div v-if="selectedComponent.selectedScales.length && editButton">
-                                <div v-for="(scale, key) in scales">
-                                    <input type="radio"
-                                           :name="keys"
-                                           :value="scale"
-                                           :data-key="key"
-                                           @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                <div v-if="selectedComponent.selectedScales.length && editButton">
+                                    <div v-for="(scale, key) in scales">
+                                        <label>
+                                            <input type="radio"
+                                                   name="keys"
+                                                   :value="scale"
+                                                   :data-key="key"
+                                                   :data-keys="keys"
+                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div v-else>
+                                    <div v-for="(scale, key) in scales">
+                                        <label>
+                                            <input type="radio"
+                                                   name="keys"
+                                                   :value="scale"
+                                                   :data-key="key"
+                                                   :data-keys="keys"
+                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 
                             <div v-else>
-                                <div v-for="(scale, key) in scales">
-                                    <input type="radio"
-                                           :name="keys"
-                                           :value="scale"
-                                           :data-key="key"
-                                           @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                <h4>{{ keys }}</h4>
+
+                                <div v-if="selectedComponent.selectedScales.length && editButton">
+                                    <div v-for="(scale, key) in scales">
+                                        <label>
+                                            <input type="radio"
+                                                   :name="keys"
+                                                   :value="scale"
+                                                   :data-key="key"
+                                                   :data-keys="keys"
+                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div v-else>
+                                    <div v-for="(scale, key) in scales">
+                                        <label>
+                                            <input type="radio"
+                                                   :name="keys"
+                                                   :value="scale"
+                                                   :data-key="key"
+                                                   :data-keys="keys"
+                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +198,8 @@
         this.selectedComponent.selectedScales.push({
           name: e.target.name,
           value: e.target.value,
-          key: e.target.attributes['data-key'].value
+          key: e.target.attributes['data-key'].value,
+          keys: e.target.attributes['data-keys'].value
         })
       },
 
@@ -298,3 +337,13 @@
     }
   }
 </script>
+
+<style scoped>
+    .evaluated {
+        margin-bottom: 10px;
+    }
+
+    .scales {
+        margin-bottom: 15px;
+    }
+</style>
