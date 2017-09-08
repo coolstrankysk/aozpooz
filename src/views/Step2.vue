@@ -13,7 +13,7 @@
                         <h3>Posúdené poruchy</h3>
 
                         <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
-                            {{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
+                            {{ selectedComponent.scaleComponent.key }}.<span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key }}</span> -
                             {{ selectedComponent.scaleComponent.component }} -
                             <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
