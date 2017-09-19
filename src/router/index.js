@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Locale from '@/views/Locale'
 import Step1 from '@/views/Step1'
 import Step2 from '@/views/Step2'
 import Step3 from '@/views/Step3'
@@ -19,9 +20,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/step1',
+      redirect: '/locale',
       name: 'Home',
       component: Step1
+    },
+    {
+      path: '/locale',
+      name: 'Locale',
+      component: Locale
     },
     {
       path: '/step1',

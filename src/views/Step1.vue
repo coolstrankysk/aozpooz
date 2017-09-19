@@ -1,11 +1,11 @@
 <template>
     <div id="app">
-        <h1 class="text-center">ICF číselník</h1>
+        <h1 class="text-center">{{ $t('icf_dial') }}</h1>
 
         <div class="animated fadeIn">
             <div id="step1" class="row">
                 <div class="col-md-12">
-                    <h2 class="text-center">Identifikačné údaje o posudzovanej osobe</h2>
+                    <h2 class="text-center">{{ $t('step1.identification_person') }}</h2>
 
                     <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
 
@@ -15,10 +15,10 @@
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                                        aria-expanded="true" aria-controls="collapseOne">
-                                        Osobné údaje
+                                        {{ $t('step1.personal_information') }}
                                     </a>
 
-                                    <label v-if="form1Error" class="control-label pull-right">Vyplňte prosím všetky povinné políčka</label>
+                                    <label v-if="form1Error" class="control-label pull-right">{{ $t('step1.form_error') }}</label>
                                 </h4>
                             </div>
 
@@ -27,27 +27,27 @@
                                 <div class="panel-body">
                                     <div class="form-group row">
                                         <div class="col-md-3">
-                                            <label for="academicDegree">Titul pred menom</label>
+                                            <label for="academicDegree">{{ $t('step1.academic_degree') }}</label>
 
                                             <select id="academicDegree"
                                                     name="academicDegree"
                                                     class="form-control"
                                                     @input="updateState">
 
-                                                <option v-for="academicDegree in academicDegrees"
+                                                <option v-for="academicDegree in $t('step1.academic_degrees')"
                                                         :value="academicDegree.value">{{ academicDegree.text }}
                                                 </option>
                                             </select>
                                         </div>
 
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.name') }">
-                                            <label for="name" class="control-label">Meno <b>*</b></label>
+                                            <label for="name" class="control-label">{{ $t('step1.name') }} <b>*</b></label>
 
                                             <input id="name"
                                                    name="name"
                                                    type="text"
                                                    class="form-control"
-                                                   placeholder="Napíšte meno"
+                                                   :placeholder="$t('step1.name_placeholder')"
                                                    required
                                                    aria-required="true"
                                                    v-model="name"
@@ -56,13 +56,13 @@
                                         </div>
 
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.surname') }">
-                                            <label for="surname" class="control-label">Priezvisko <b>*</b></label>
+                                            <label for="surname" class="control-label">{{ $t('step1.surname') }} <b>*</b></label>
 
                                             <input id="surname"
                                                    name="surname"
                                                    type="text"
                                                    class="form-control"
-                                                   placeholder="Napíšte priezvisko"
+                                                   :placeholder="$t('step1.surname_placeholder')"
                                                    required
                                                    aria-required="true"
                                                    :value="surname"
@@ -71,14 +71,14 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label for="academicDegreeAfter">Titul za menom</label>
+                                            <label for="academicDegreeAfter">{{ $t('step1.academic_degree_after') }}</label>
 
                                             <select id="academicDegreeAfter"
                                                     name="academicDegreeAfter"
                                                     class="form-control"
                                                     @input="updateState">
 
-                                                <option v-for="academicDegreeAfter in academicDegreesAfter"
+                                                <option v-for="academicDegreeAfter in $t('step1.academic_degrees_after')"
                                                         :value="academicDegreeAfter.value">{{ academicDegreeAfter.text
                                                     }}
                                                 </option>
@@ -88,7 +88,7 @@
                                     <div class="form-group row">
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.birthDate') }">
                                             <label for="birthDate"
-                                                   class="control-label">Dátum narodenia <b>*</b></label>
+                                                   class="control-label">{{ $t('step1.birth_date') }} <b>*</b></label>
 
                                             <input type="date"
                                                    id="birthDate"
@@ -103,13 +103,13 @@
 
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.birthPlace') }">
                                             <label for="birthPlace"
-                                                   class="control-label">Miesto narodenia <b>*</b></label>
+                                                   class="control-label">{{ $t('step1.birth_place') }} <b>*</b></label>
 
                                             <input type="text"
                                                    id="birthPlace"
                                                    name="birthPlace"
                                                    class="form-control"
-                                                   placeholder="Napíšte mesto"
+                                                   :placeholder="$t('step1.birth_place_placeholder')"
                                                    required
                                                    aria-required="true"
                                                    :value="birthPlace"
@@ -121,13 +121,13 @@
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title">Adresa trvalého bydliska</h3>
+                                                    <h3 class="panel-title">{{ $t('step1.permanent_address') }}</h3>
                                                 </div>
 
                                                 <div class="panel-body">
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.country') }">
                                                         <label for="country"
-                                                               class="control-label">Krajina <b>*</b></label>
+                                                               class="control-label">{{ $t('step1.country') }} <b>*</b></label>
 
                                                         <select id="country"
                                                                 name="country"
@@ -137,19 +137,19 @@
                                                                 v-validate="'required'"
                                                                 @input="updateState">
 
-                                                            <option v-for="country in countries"
+                                                            <option v-for="country in $t('step1.countries')"
                                                                     :value="country.value">{{ country.text }}
                                                             </option>
                                                         </select>
                                                     </div>
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.city') }">
-                                                        <label for="city" class="control-label">Mesto <b>*</b></label>
+                                                        <label for="city" class="control-label">{{ $t('step1.city') }} <b>*</b></label>
 
                                                         <input id="city"
                                                                name="city"
                                                                class="form-control"
-                                                               placeholder="Napíšte mesto"
+                                                               :placeholder="$t('step1.city_placeholder')"
                                                                required
                                                                aria-required="true"
                                                                :value="city"
@@ -158,12 +158,12 @@
                                                     </div>
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.zip') }">
-                                                        <label for="zip" class="control-label">PSČ <b>*</b></label>
+                                                        <label for="zip" class="control-label">{{ $t('step1.zip') }} <b>*</b></label>
 
                                                         <input id="zip"
                                                                name="zip"
                                                                class="form-control"
-                                                               placeholder="Napíšte PSČ"
+                                                               :placeholder="$t('step1.zip_placeholder')"
                                                                required
                                                                aria-required="true"
                                                                :value="zip"
@@ -172,12 +172,12 @@
                                                     </div>
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.street') }">
-                                                        <label for="street" class="control-label">Ulica <b>*</b></label>
+                                                        <label for="street" class="control-label">{{ $t('step1.address') }} <b>*</b></label>
 
                                                         <input id="street"
                                                                name="street"
                                                                class="form-control"
-                                                               placeholder="Napíšte ulicu"
+                                                               :placeholder="$t('step1.address_placeholder')"
                                                                required
                                                                aria-required="true"
                                                                :value="street"
@@ -187,12 +187,12 @@
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.streetNumber') }">
                                                         <label for="streetNumber"
-                                                               class="control-label">Popisné číslo <b>*</b></label>
+                                                               class="control-label">{{ $t('step1.reference_number') }} <b>*</b></label>
 
                                                         <input id="streetNumber"
                                                                name="streetNumber"
                                                                class="form-control"
-                                                               placeholder="Napíšte popisné číslo"
+                                                               :placeholder="$t('step1.reference_number_placeholder')"
                                                                required
                                                                aria-required="true"
                                                                :value="streetNumber"
@@ -205,18 +205,18 @@
                                         <div class="col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title">Kontakt</h3>
+                                                    <h3 class="panel-title">{{ $t('step1.contact') }}</h3>
                                                 </div>
 
                                                 <div class="panel-body">
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.email') }">
-                                                        <label for="email" class="control-label">Email <b>*</b></label>
+                                                        <label for="email" class="control-label">{{ $t('step1.email') }} <b>*</b></label>
 
                                                         <input type="email"
                                                                id="email"
                                                                name="email"
                                                                class="form-control"
-                                                               placeholder="Napíšte email"
+                                                               :placeholder="$t('step1.email_placeholder')"
                                                                required
                                                                aria-required="true"
                                                                :value="email"
@@ -225,23 +225,23 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="phone">Telefónne číslo</label>
+                                                        <label for="phone">{{ $t('step1.telephone_number') }}</label>
 
                                                         <input id="phone"
                                                                name="phone"
                                                                class="form-control"
-                                                               placeholder="Napíšte telefónne číslo"
+                                                               :placeholder="$t('step1.telephone_number_placeholder')"
                                                                :value="phone"
                                                                @input="updateState">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="mobile">Mobilné číslo</label>
+                                                        <label for="mobile">{{ $t('step1.phone_number') }}</label>
 
                                                         <input id="mobile"
                                                                name="mobile"
                                                                class="form-control"
-                                                               placeholder="Napíšte mobilné číslo"
+                                                               :placeholder="$t('step1.phone_number_placeholder')"
                                                                :value="mobile"
                                                                @input="updateState">
                                                     </div>
@@ -257,10 +257,10 @@
                             <div class="panel-heading has-error" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="collapsed"
-                                       @click="validateForm1"> Doplňujúce údaje o posudzovanej osobe
+                                       @click="validateForm1"> {{ $t('step1.additional_data') }}
                                     </a>
 
-                                    <label v-if="form2Error" class="control-label pull-right">Vyplňte prosím všetky povinné políčka</label>
+                                    <label v-if="form2Error" class="control-label pull-right">{{ $t('step1.form_error') }}</label>
                                 </h4>
                             </div>
 
@@ -268,7 +268,7 @@
                                  aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.maritalStatus') }">
-                                        <label for="maritalStatus" class="control-label">Rodinný stav <b>*</b></label>
+                                        <label for="maritalStatus" class="control-label">{{ $t('step1.marital_status') }} <b>*</b></label>
 
                                         <select id="maritalStatus"
                                                 name="maritalStatus"
@@ -278,14 +278,14 @@
                                                 v-validate="'required'"
                                                 @input="updateState">
 
-                                            <option v-for="maritalStatus in maritalStatuses"
+                                            <option v-for="maritalStatus in $t('step1.marital_statuses')"
                                                     :value="maritalStatus.value">{{ maritalStatus.text }}
                                             </option>
                                         </select>
                                     </div>
 
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.education') }">
-                                        <label for="education" class="control-label">Vzdelanie <b>*</b></label>
+                                        <label for="education" class="control-label">{{ $t('step1.education') }} <b>*</b></label>
 
                                         <select id="education"
                                                 name="education"
@@ -295,14 +295,14 @@
                                                 v-validate="'required'"
                                                 @input="updateState">
 
-                                            <option v-for="education in educations"
+                                            <option v-for="education in $t('step1.educations')"
                                                     :value="education.value">{{ education.text }}
                                             </option>
                                         </select>
                                     </div>
 
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.employmentStatus') }">
-                                        <label for="employmentStatus" class="control-label">Zamestnanie <b>*</b></label>
+                                        <label for="employmentStatus" class="control-label">{{ $t('step1.employment_status') }} <b>*</b></label>
 
                                         <select id="employmentStatus"
                                                 name="employmentStatus"
@@ -312,17 +312,17 @@
                                                 v-validate="'required'"
                                                 @input="updateState">
 
-                                            <option v-for="employmentStatus in employmentStatuses"
+                                            <option v-for="employmentStatus in $t('step1.employment_statuses')"
                                                     :value="employmentStatus.value">{{ employmentStatus.text }}
                                             </option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employmentType">Pracovno-právny vzťah</label>
+                                        <label for="employmentType">{{ $t('step1.employment_type') }}</label>
 
                                         <select id="employmentType" class="form-control">
-                                            <option v-for="employmentType in employmentTypes"
+                                            <option v-for="employmentType in $t('step1.employment_types')"
                                                     :value="employmentType.value">{{ employmentType.text }}
                                             </option>
                                         </select>
@@ -336,7 +336,7 @@
                                 <h4 class="panel-title">
                                     <a class="collapsed"
                                        @click="validateForm2">
-                                        Základná diagnóza
+                                        {{ $t('step1.basic_diagnosis') }}
                                     </a>
                                 </h4>
                             </div>
@@ -344,7 +344,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="diagnosisMkch10">Diagnóza podľa MKCH10</label>
+                                        <label for="diagnosisMkch10">{{ $t('step1.diagnosis_mkch10') }}</label>
 
                                         <textarea id="diagnosisMkch10"
                                                   name="diagnosisMkch10"
@@ -353,51 +353,51 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <h5>Priznaná invalidita</h5>
+                                            <h5>{{ $t('step1.assigned_disability') }}</h5>
 
                                             <input type="radio"
                                                    id="assigned_disability_none"
                                                    name="assignedDisability"
-                                                   value="Žiadna"
+                                                   :value="$t('step1.assigned_disability_none')"
                                                    class="form-check"
                                                    @change="updateState">
 
-                                            <label for="assigned_disability_none">&nbsp;Žiadna</label>
+                                            <label for="assigned_disability_none">&nbsp;{{ $t('step1.assigned_disability_none') }}</label>
 
                                             <br>
 
                                             <input type="radio"
                                                    id="assigned_disability_partial"
                                                    name="assignedDisability"
-                                                   value="Čiastočná"
+                                                   :value="$t('step1.assigned_disability_partial')"
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="assigned_disability_partial">Čiastočná</label>
+                                            <label for="assigned_disability_partial">{{ $t('step1.assigned_disability_partial') }}</label>
 
                                             <br>
 
                                             <input type="radio"
                                                    id="assigned_disability_full"
                                                    name="assignedDisability"
-                                                   value="Plná"
+                                                   :value="$t('step1.assigned_disability_full')"
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="assigned_disability_full">Plná</label>
+                                            <label for="assigned_disability_full">{{ $t('step1.assigned_disability_full') }}</label>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <h5>Držiteľ preukazu ZŤP</h5>
+                                            <h5>{{ $t('step1.ztp_holder') }}</h5>
 
                                             <input type="radio"
                                                    name="ztpHolder"
                                                    id="ztp_holder_yes"
-                                                   value="Držiteľ preukazu ZŤP"
+                                                   :value="$t('step1.ztp_holder')"
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="ztp_holder_yes">Áno</label>
+                                            <label for="ztp_holder_yes">{{ $t('step1.ztp_holder_yes') }}</label>
 
                                             <br>
 
@@ -408,20 +408,20 @@
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="ztp_holder_no">Nie</label>
+                                            <label for="ztp_holder_no">{{ $t('step1.ztp_holder_no') }}</label>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <h5>Držiteľ preukazu ZŤP/S</h5>
+                                            <h5>{{ $t('step1.ztps_holder') }}</h5>
 
                                             <input type="radio"
                                                    name="ztpsHolder"
                                                    id="ztps_holder_yes"
-                                                   value="Držiteľ preukazu ZŤP/S"
+                                                   :value="$t('step1.ztps_holder')"
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="ztps_holder_yes">Áno</label>
+                                            <label for="ztps_holder_yes">{{ $t('step1.ztp_holder_yes') }}</label>
 
                                             <br>
 
@@ -432,11 +432,11 @@
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="ztps_holder_no">Nie</label>
+                                            <label for="ztps_holder_no">{{ $t('step1.ztps_holder_no') }}</label>
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="diagnosisBrief">Stručná anamnéza</label>
+                                        <label for="diagnosisBrief">{{ $t('step1.diagnosis_brief') }}</label>
 
                                         <textarea id="diagnosisBrief"
                                                   name="diagnosisBrief"
@@ -455,7 +455,7 @@
                 <input type="button"
                        id="next-step"
                        class="btn btn-primary pull-right"
-                       value="Ďalej"
+                       :value="$t('next')"
                        @click="validateStep1">
             </div>
         </div>

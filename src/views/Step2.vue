@@ -1,19 +1,22 @@
 <template>
     <div id="app">
-        <h1 class="text-center">ICF číselník</h1>
+        <h1 class="text-center">{{ $t('icf_dial') }}</h1>
 
         <div class="animated fadeIn">
             <div id="step2" class="row">
                 <div class="col-md-12">
-                    <h2 class="text-center">Posudzované komponenty</h2>
+                    <h2 class="text-center">{{ $t('step2.aasessed_components') }}</h2>
 
                     <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
 
                     <div class="evaluated" v-if="selectedComponents.length">
-                        <h3>Posúdené poruchy</h3>
+                        <h3>{{ $t('step2.aasessed_components') }}</h3>
 
                         <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
-                            {{ selectedComponent.scaleComponent.key }}<span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.keys === 'Debariérizátor' ? '+' : '.' }}</span><span v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key }}</span> -
+                            {{ selectedComponent.scaleComponent.key }}{{ (selectedComponent.selectedScales[0].keys === 'Debariérizátor' || selectedComponent.selectedScales[0].keys === 'Facilitator') ? '+' : '.'
+                            }}<span
+                                v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key
+                            }}</span> -
                             {{ selectedComponent.scaleComponent.component }} -
                             <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
@@ -33,9 +36,9 @@
                         <select class="form-control form-group"
                                 @input="editComponent">
 
-                            <option value selected>Vyberte</option>
+                            <option value selected>{{ $t('step2.choose') }}</option>
 
-                            <template v-for="(component, key) in components">
+                            <template v-for="(component, key) in $t('step2.components')[0]">
                                 <option v-if="selectedComponent.name"
                                         :selected="selectedComponent.name == key">{{ key }}
                                 </option>
@@ -58,7 +61,7 @@
                         <div class="scales" v-if="showScales"
                              v-for="(scales, keys) in selectedComponent.scales">
 
-                            <div v-if="keys === 'Bariéra' || keys === 'Debariérizátor'">
+                            <div v-if="keys === 'Bariéra' || keys === 'Debariérizátor' || keys === 'Barrier' || keys === 'Facilitator'">
                                 <h4>{{ keys }}</h4>
 
                                 <div v-if="selectedComponent.selectedScales.length && editButton">
@@ -147,11 +150,11 @@
             <div class="col-md-12 well">
 
                 <router-link to="/step1" class="btn btn-primary">
-                    Späť
+                    {{ $t('back') }}
                 </router-link>
 
                 <router-link to="/step3" class="btn btn-primary pull-right">
-                    Ďalej
+                    {{ $t('next') }}
                 </router-link>
             </div>
         </div>
@@ -160,7 +163,7 @@
 
 <script>
   /* eslint-disable */
-  import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'step2',
@@ -268,9 +271,9 @@
         if (component) {
           this.selectedComponent.name = component
 
-          this.selectedComponent.scales = this.components[component].scales
+          this.selectedComponent.scales = this.$t('step2.components')[0][component].scales
 
-          this.selectedComponent.components.push(this.components[component].components)
+          this.selectedComponent.components.push(this.$t('step2.components')[0][component].components)
 
           this.showScales = false
 
@@ -328,9 +331,10 @@
     computed: {
       ...mapState([
         'selectedComponents',
-        'components',
+        'enComponents',
         'academicDegree',
         'name',
+
         'surname',
         'academicDegreeAfter'
       ])

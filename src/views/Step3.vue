@@ -1,43 +1,57 @@
 <template>
 	<div id="app">
-		<h1 class="text-center">ICF číselník</h1>
+		<h1 class="text-center">{{ $t('icf_dial') }}</h1>
 
 		<div class="col-md-12">
-			<h2 class="text-center">Kontrola a export</h2>
+			<h2 class="text-center">{{ $t('step3.control_and_export') }}</h2>
 
 			<div id="report">
             	<div id="personal-data">
-            		<h3>Identifikačné údaje</h3>
+            		<h3>{{ $t('step3.identification_data') }}</h3>
 
             		<div>{{ academicDegree }} {{ name }} {{ surname }}, {{ academicDegreeAfter }} ({{ birthDate }}, {{ birthPlace }})</div>
 
-            		<div><b>Trvalé bydlisko:</b> {{ street }} {{ streetNumber }}, {{ zip }} {{ city }}, {{ country }}</div>
+            		<div>
+						<b>{{ $t('step3.permanent_address') }}:</b> {{ street }} {{ streetNumber }}, {{ zip }} {{ city }}, {{ country }}
+					</div>
 
             		<div>
-            			<b>Kontaktné údaje:</b> {{ email }}<span v-if="phone">, {{ phone }}</span><span v-if="mobile">, {{ mobile }}</span>
+            			<b>{{ $t('step3.contact_information') }}:</b> {{ email }}<span v-if="phone">, {{ phone }}</span><span v-if="mobile">, {{ mobile }}</span>
         			</div>
 
-            		<div><b>Rodinný stav:</b> {{ maritalStatus }}</div>
-
-            		<div><b>Vzdelanie:</b> {{ education }}</div>
-
-            		<div><b>Zamestnanie:</b> {{ employmentStatus }}</div>
-
-            		<div><b>Pracovno-právny vzťah:</b> {{ employmentType }}</div>
+            		<div>
+						<b>{{ $t('step3.marital_status') }}:</b> {{ maritalStatus }}
+					</div>
 
             		<div>
-            			<b>Priznaná invalidita:</b>
+						<b>{{ $t('step3.education') }}:</b> {{ education }}
+					</div>
+
+            		<div>
+						<b>{{ $t('step3.employment') }}:</b> {{ employmentStatus }}
+					</div>
+
+            		<div>
+						<b>{{ $t('step3.employment_type') }}:</b> {{ employmentType }}
+					</div>
+
+            		<div>
+            			<b>{{ $t('step3.assigned_disability') }}:</b>
 
             			{{ assignedDisability }}<span v-if="ztpHolder">, {{ ztpHolder }}</span><span v-if="ztpsHolder">, {{ ztpsHolder }}</span> 
             		</div>
 
-            		<div><b>Diagnóza podľa MKCH10:</b> {{ diagnosisMkch10 }}</div>
+            		<div>
+						<b>{{ $t('step3.diagnosis_mkch10') }}:</b> {{ diagnosisMkch10 }}
+					</div>
 
-            		<div><b>Stručná anamnéza:</b> {{ diagnosisBrief }}</div>
+            		<div>
+						<b>{{ $t('step3.diagnosis_brief') }}:</b> {{ diagnosisBrief }}
+					</div>
             	</div>
 
             	<div class="evaluated" v-if="selectedComponents.length">
-            		<h3>Posúdené poruchy</h3>
+            		<h3>{{ $t('step3.assessed_failures') }}</h3>
             		
             		<div v-for="selectedComponent in selectedComponents">
 						{{ selectedComponent.scaleComponent.key }}.{{ selectedComponent.selectedScales[0].key }} -
@@ -52,10 +66,14 @@
 
 		<div class="col-md-12 well">
 			<router-link to="/step2" class="btn btn-primary">
-				Späť
+				{{ $t('back') }}
 			</router-link>
 
-    		<input type="button" id="next-step" class="btn btn-primary pull-right" value="Tlačiť" @click="print">
+    		<input type="button"
+				   id="next-step"
+				   class="btn btn-primary pull-right"
+				   :value="$t('step3.print')"
+				   @click="print">
 		</div>
 	</div>
 </template>
