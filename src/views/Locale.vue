@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1 class="text-center">Choose langeage / Vyberte jazyk</h1>
+        <h1 class="text-center">Choose language / Vyberte jazyk</h1>
 
         <div class="animated fadeIn">
             <div id="step1" class="row">
