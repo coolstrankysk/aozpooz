@@ -1,7 +1,7 @@
 export default {
   next: 'Next',
   back: 'Back',
-  icf_dial: 'ICF dial',
+  icf_dial: 'ICF diagnostic form',
   step1: {
     identification_person: 'Identification data of the person',
     personal_information: 'Personal information',
