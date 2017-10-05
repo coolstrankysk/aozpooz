@@ -1,164 +1,179 @@
 <template>
     <div id="app">
-        <h1 class="text-center">{{ $t('icf_dial') }}</h1>
+        <div class="container">
+            <h1 class="text-center">{{ $t('icf_dial') }}</h1>
 
-        <div class="animated fadeIn">
-            <div id="step2" class="row">
-                <div class="col-md-12">
-                    <h2 class="text-center">{{ $t('step2.aasessed_components') }}</h2>
+            <div class="animated fadeIn">
+                <div id="step2" class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">{{ $t('step2.aasessed_components') }}</h2>
 
-                    <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
+                        <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
 
-                    <div class="evaluated" v-if="selectedComponents.length">
-                        <h3>{{ $t('step2.aasessed_components') }}</h3>
+                        <div class="evaluated" v-if="selectedComponents.length">
+                            <h3>{{ $t('step2.aasessed_components') }}</h3>
 
-                        <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
-                            {{ selectedComponent.scaleComponent.key }}{{ (selectedComponent.selectedScales[0].keys === 'Debariérizátor' || selectedComponent.selectedScales[0].keys === 'Facilitator') ? '+' : '.'
-                            }}<span
-                                v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key
-                            }}</span> -
-                            {{ selectedComponent.scaleComponent.component }} -
-                            <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
+                            <div v-for="(selectedComponent, selectedComponentIndex) in selectedComponents">
+                                {{ selectedComponent.scaleComponent.key }}{{ (selectedComponent.selectedScales[0].keys === 'Debariérizátor' || selectedComponent.selectedScales[0].keys === 'Facilitator') ? '+' : '.'
+                                }}<span
+                                    v-for="(selectedScale, index) in selectedComponent.selectedScales">{{ selectedScale.key
+                                }}</span> -
+                                {{ selectedComponent.scaleComponent.component }} -
+                                <span v-for="(selectedScale, index) in selectedComponent.selectedScales">
 			        			{{ selectedScale.value }}
 			        		</span>
-                            <span class="glyphicon glyphicon-pencil text-warning"
-                                  @click="editComponents(selectedComponentIndex)"
-                                  aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-remove text-danger"
-                                  @click="removeComponents(selectedComponentIndex)"
-                                  aria-hidden="true"></span>
-                        </div>
-                    </div>
-
-                    <div id="components">
-                        <label>
-                            <h3>{{ $t('step2.choose_component') }}</h3>
-
-                            <select class="form-control form-group"
-                                    @input="editComponent">
-
-                                <option value selected>{{ $t('step2.choose') }}</option>
-
-                                <template v-for="(component, key) in $t('step2.components')[0]">
-                                    <option v-if="selectedComponent.name"
-                                            :selected="selectedComponent.name == key">{{ key }}
-                                    </option>
-
-                                    <option v-else>{{ key }}</option>
-                                </template>
-                            </select>
-                        </label>
-
-                        <label v-for="components in selectedComponent.components">
-                            <h3 v-if="components[Object.keys(components)[0]] instanceof Object">{{ $t('step2.choose_category') }}</h3>
-                            <h3 v-else>{{ $t('step2.choose_subcategory') }}</h3>
-
-                            <select class="form-control form-group component"
-                                    @input="editSelectedComponent">
-
-                                <template v-for="(component, key) in components">
-                                    <option v-if="component instanceof Object">{{ key }}</option>
-
-                                    <option v-else :value="key">{{ key }}: {{ component }}</option>
-                                </template>
-                            </select>
-                        </label>
-
-                        <div class="scales" v-if="showScales"
-                             v-for="(scales, keys) in selectedComponent.scales">
-
-                            <div v-if="keys === 'Bariéra' || keys === 'Debariérizátor' || keys === 'Barrier' || keys === 'Facilitator'">
-                                <h4>{{ keys }}</h4>
-
-                                <div v-if="selectedComponent.selectedScales.length && editButton">
-                                    <div v-for="(scale, key) in scales">
-                                        <label>
-                                            <input type="radio"
-                                                   name="keys"
-                                                   :value="scale"
-                                                   :data-key="key"
-                                                   :data-keys="keys"
-                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div v-else>
-                                    <div v-for="(scale, key) in scales">
-                                        <label>
-                                            <input type="radio"
-                                                   name="keys"
-                                                   :value="scale"
-                                                   :data-key="key"
-                                                   :data-keys="keys"
-                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
-                                        </label>
-                                    </div>
-                                </div>
+                                <span class="glyphicon glyphicon-pencil text-warning"
+                                      @click="editComponents(selectedComponentIndex)"
+                                      aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-remove text-danger"
+                                      @click="removeComponents(selectedComponentIndex)"
+                                      aria-hidden="true"></span>
                             </div>
+                        </div>
 
-                            <div v-else>
-                                <h4>{{ keys }}</h4>
+                        <div id="components">
+                            <label>
+                                <h3>{{ $t('step2.choose_component') }}</h3>
 
-                                <div v-if="selectedComponent.selectedScales.length && editButton">
-                                    <div v-for="(scale, key) in scales">
-                                        <label>
-                                            <input type="radio"
-                                                   :name="keys"
-                                                   :value="scale"
-                                                   :data-key="key"
-                                                   :data-keys="keys"
-                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
-                                        </label>
+                                <select class="form-control form-group"
+                                        @input="editComponent">
+
+                                    <option value selected>{{ $t('step2.choose') }}</option>
+
+                                    <template v-for="(component, key) in $t('step2.components')[0]">
+                                        <option v-if="selectedComponent.name"
+                                                :selected="selectedComponent.name == key">{{ key }}
+                                        </option>
+
+                                        <option v-else>{{ key }}</option>
+                                    </template>
+                                </select>
+                            </label>
+
+                            <label v-for="components in selectedComponent.components">
+                                <h3 v-if="components[Object.keys(components)[0]] instanceof Object">{{ $t('step2.choose_category') }}</h3>
+                                <h3 v-else>{{ $t('step2.choose_subcategory') }}</h3>
+
+                                <select class="form-control form-group component"
+                                        @input="editSelectedComponent">
+
+                                    <template v-for="(component, key) in components">
+                                        <option v-if="component instanceof Object">{{ key }}</option>
+
+                                        <option v-else :value="key">{{ key }}: {{ component }}</option>
+                                    </template>
+                                </select>
+                            </label>
+
+                            <div class="scales" v-if="showScales"
+                                 v-for="(scales, keys) in selectedComponent.scales">
+
+                                <div v-if="keys === 'Bariéra' || keys === 'Debariérizátor' || keys === 'Barrier' || keys === 'Facilitator'">
+                                    <h4>{{ keys }}</h4>
+
+                                    <div v-if="selectedComponent.selectedScales.length && editButton">
+                                        <div v-for="(scale, key) in scales">
+                                            <label>
+                                                <input type="radio"
+                                                       name="keys"
+                                                       :value="scale"
+                                                       :data-key="key"
+                                                       :data-keys="keys"
+                                                       @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div v-else>
+                                        <div v-for="(scale, key) in scales">
+                                            <label>
+                                                <input type="radio"
+                                                       name="keys"
+                                                       :value="scale"
+                                                       :data-key="key"
+                                                       :data-keys="keys"
+                                                       @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div v-else>
-                                    <div v-for="(scale, key) in scales">
-                                        <label>
-                                            <input type="radio"
-                                                   :name="keys"
-                                                   :value="scale"
-                                                   :data-key="key"
-                                                   :data-keys="keys"
-                                                   @change="showSaveButton"> <strong>{{ scale }}</strong>
-                                        </label>
+                                    <h4>{{ keys }}</h4>
+
+                                    <div v-if="selectedComponent.selectedScales.length && editButton">
+                                        <div v-for="(scale, key) in scales">
+                                            <label>
+                                                <input type="radio"
+                                                       :name="keys"
+                                                       :value="scale"
+                                                       :data-key="key"
+                                                       :data-keys="keys"
+                                                       @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div v-else>
+                                        <div v-for="(scale, key) in scales">
+                                            <label>
+                                                <input type="radio"
+                                                       :name="keys"
+                                                       :value="scale"
+                                                       :data-key="key"
+                                                       :data-keys="keys"
+                                                       @change="showSaveButton"> <strong>{{ scale }}</strong>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-12 well" v-if="selectedComponent.name">
+                <div class="col-md-12 well" v-if="selectedComponent.name">
 
-                <input type="button"
-                       :value="$t('step2.save')"
-                       class="btn btn-success"
-                       v-if="saveButton && !editButton"
-                       @click="saveSelectedComponent">
+                    <input type="button"
+                           :value="$t('step2.save')"
+                           class="btn btn-success"
+                           v-if="saveButton && !editButton"
+                           @click="saveSelectedComponent">
 
-                <input type="button"
-                       :value="$t('step2.edit')"
-                       class="btn btn-success"
-                       v-if="editButton && showScales"
-                       @click="saveComponent">
+                    <input type="button"
+                           :value="$t('step2.edit')"
+                           class="btn btn-success"
+                           v-if="editButton && showScales"
+                           @click="saveComponent">
 
-                <a class="pull-right" @click="deleteSelectedComponent">{{ $t('step2.delete') }}</a>
-            </div>
+                    <a class="pull-right" @click="deleteSelectedComponent">{{ $t('step2.delete') }}</a>
+                </div>
 
-            <div class="col-md-12 well">
+                <div class="col-md-12 well">
 
-                <router-link to="/step1" class="btn btn-primary">
-                    {{ $t('back') }}
-                </router-link>
+                    <router-link to="/step1" class="btn btn-primary">
+                        {{ $t('back') }}
+                    </router-link>
 
-                <router-link to="/step3" class="btn btn-primary pull-right">
-                    {{ $t('next') }}
-                </router-link>
+                    <router-link to="/step3" class="btn btn-primary pull-right">
+                        {{ $t('next') }}
+                    </router-link>
+                </div>
             </div>
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                Vytvorili
+                <a href="http://www.coolstranky.sk/" target="_blank">
+                    <img class="coolstranky" src="http://www.coolstranky.sk/sites/default/files/logo_0.png" alt="CoolStránky">
+                </a>
+                a
+                <a href="https://slovensko.digital/" target="_blank">
+                    <img class="slovenskodigital" src="https://slovensko.digital/img/logo/slovenskodigital-logo.svg" alt="Slovensko digital">
+                </a>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -357,5 +372,27 @@
 
     label {
         width: 100%;
+    }
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        background-color: #337ab7;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .footer img {
+        margin: 10px;
+    }
+
+    .coolstranky {
+        width: 120px;
+    }
+
+    .slovenskodigital {
+        width: 140px;
     }
 </style>

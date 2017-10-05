@@ -1,15 +1,18 @@
 <template>
     <div id="app">
-        <h1 class="text-center">{{ $t('icf_dial') }}</h1>
+        <div class="container">
+            <h1 class="text-center">{{ $t('icf_dial') }}</h1>
 
-        <div class="animated fadeIn">
-            <div id="step1" class="row">
-                <div class="col-md-12">
-                    <h2 class="text-center">{{ $t('step1.identification_person') }}</h2>
+            <div class="animated fadeIn">
+                <div id="step1" class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">{{ $t('step1.identification_person') }}</h2>
 
-                    <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
+                        <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter
+                            }}</h3>
 
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
                         <form class="panel panel-default" data-vv-scope="form-1">
                             <div class="panel-heading has-error" role="tab" id="headingOne" @click="setStep(1)">
                                 <h4 class="panel-title">
@@ -18,7 +21,8 @@
                                         {{ $t('step1.personal_information') }}
                                     </a>
 
-                                    <label v-if="form1Error" class="control-label pull-right">{{ $t('step1.form_error') }}</label>
+                                    <label v-if="form1Error" class="control-label pull-right">{{ $t('step1.form_error')
+                                        }}</label>
                                 </h4>
                             </div>
 
@@ -471,10 +475,22 @@
                        class="btn btn-primary pull-right"
                        :value="$t('next')"
                        @click="nextStep">
-
-                {{ step }}
             </div>
         </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                Vytvorili
+                <a href="http://www.coolstranky.sk/" target="_blank">
+                    <img class="coolstranky" src="http://www.coolstranky.sk/sites/default/files/logo_0.png" alt="CoolStránky">
+                </a>
+                a
+                <a href="https://slovensko.digital/" target="_blank">
+                    <img class="slovenskodigital" src="https://slovensko.digital/img/logo/slovenskodigital-logo.svg" alt="Slovensko digital">
+                </a>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -629,3 +645,27 @@
     }
   }
 </script>
+
+<style scoped>
+    .footer {
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        background-color: #337ab7;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .footer img {
+        margin: 10px;
+    }
+
+    .coolstranky {
+        width: 120px;
+    }
+
+    .slovenskodigital {
+        width: 140px;
+    }
+</style>
