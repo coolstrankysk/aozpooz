@@ -134,23 +134,18 @@
             <div class="col-md-12 well" v-if="selectedComponent.name">
 
                 <input type="button"
-                       value="Uložiť"
+                       :value="$t('step2.save')"
                        class="btn btn-success"
                        v-if="saveButton && !editButton"
                        @click="saveSelectedComponent">
 
                 <input type="button"
-                       value="Zmeniť"
+                       :value="$t('step2.edit')"
                        class="btn btn-success"
                        v-if="editButton && showScales"
                        @click="saveComponent">
 
-                <input type="button"
-                       value="Zrušiť"
-                       class="btn btn-danger"
-                       @click="deleteSelectedComponent">
-
-
+                <a class="pull-right" @click="deleteSelectedComponent">{{ $t('step2.delete') }}</a>
             </div>
 
             <div class="col-md-12 well">

@@ -124,6 +124,9 @@ export default {
     choose_category: 'Vyberte kategoriu',
     choose_subcategory: 'Choose subcategory',
     aasessed_components: 'Vyberte subkategoriu',
+    save: 'Uložiť',
+    edit: 'Zmeniť',
+    delete: 'Vymazať',
     components: [
       {
         'TELESNÉ FUNKCIE': {

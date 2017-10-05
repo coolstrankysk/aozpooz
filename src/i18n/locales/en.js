@@ -124,6 +124,9 @@ export default {
     choose_category: 'Choose category',
     choose_subcategory: 'Choose subcategory',
     aasessed_components: 'Assessed components',
+    save: 'Save',
+    edit: 'Edit',
+    delete: 'Delete',
     components: [
       {
         'BODY FUNCTIONS': {
