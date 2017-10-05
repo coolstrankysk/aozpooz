@@ -9,9 +9,9 @@
 
                     <h3 class="text-center">{{ academicDegree }} {{ name }} {{ surname }} {{ academicDegreeAfter }}</h3>
 
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"">
                         <form class="panel panel-default" data-vv-scope="form-1">
-                            <div class="panel-heading has-error" role="tab" id="headingOne">
+                            <div class="panel-heading has-error" role="tab" id="headingOne" @click="setStep(1)">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                                        aria-expanded="true" aria-controls="collapseOne">
@@ -41,7 +41,8 @@
                                         </div>
 
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.name') }">
-                                            <label for="name" class="control-label">{{ $t('step1.name') }} <b>*</b></label>
+                                            <label for="name" class="control-label">{{ $t('step1.name')
+                                                }} <b>*</b></label>
 
                                             <input id="name"
                                                    name="name"
@@ -56,7 +57,8 @@
                                         </div>
 
                                         <div :class="{'col-md-3': true, 'has-error': errors.has('form-1.surname') }">
-                                            <label for="surname" class="control-label">{{ $t('step1.surname') }} <b>*</b></label>
+                                            <label for="surname" class="control-label">{{ $t('step1.surname')
+                                                }} <b>*</b></label>
 
                                             <input id="surname"
                                                    name="surname"
@@ -71,7 +73,8 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label for="academicDegreeAfter">{{ $t('step1.academic_degree_after') }}</label>
+                                            <label for="academicDegreeAfter">{{ $t('step1.academic_degree_after')
+                                                }}</label>
 
                                             <select id="academicDegreeAfter"
                                                     name="academicDegreeAfter"
@@ -144,7 +147,8 @@
                                                     </div>
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.city') }">
-                                                        <label for="city" class="control-label">{{ $t('step1.city') }} <b>*</b></label>
+                                                        <label for="city" class="control-label">{{ $t('step1.city')
+                                                            }} <b>*</b></label>
 
                                                         <input id="city"
                                                                name="city"
@@ -172,7 +176,8 @@
                                                     </div>
 
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.street') }">
-                                                        <label for="street" class="control-label">{{ $t('step1.address') }} <b>*</b></label>
+                                                        <label for="street" class="control-label">{{ $t('step1.address')
+                                                            }} <b>*</b></label>
 
                                                         <input id="street"
                                                                name="street"
@@ -210,7 +215,8 @@
 
                                                 <div class="panel-body">
                                                     <div :class="{'form-group': true, 'has-error': errors.has('form-1.email') }">
-                                                        <label for="email" class="control-label">{{ $t('step1.email') }} <b>*</b></label>
+                                                        <label for="email" class="control-label">{{ $t('step1.email')
+                                                            }} <b>*</b></label>
 
                                                         <input type="email"
                                                                id="email"
@@ -257,10 +263,11 @@
                             <div class="panel-heading has-error" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="collapsed"
-                                       @click="validateForm1"> {{ $t('step1.additional_data') }}
+                                       @click="validateForm1(2)"> {{ $t('step1.additional_data') }}
                                     </a>
 
-                                    <label v-if="form2Error" class="control-label pull-right">{{ $t('step1.form_error') }}</label>
+                                    <label v-if="form2Error" class="control-label pull-right">{{ $t('step1.form_error')
+                                        }}</label>
                                 </h4>
                             </div>
 
@@ -268,7 +275,8 @@
                                  aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.maritalStatus') }">
-                                        <label for="maritalStatus" class="control-label">{{ $t('step1.marital_status') }} <b>*</b></label>
+                                        <label for="maritalStatus" class="control-label">{{ $t('step1.marital_status')
+                                            }} <b>*</b></label>
 
                                         <select id="maritalStatus"
                                                 name="maritalStatus"
@@ -285,7 +293,8 @@
                                     </div>
 
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.education') }">
-                                        <label for="education" class="control-label">{{ $t('step1.education') }} <b>*</b></label>
+                                        <label for="education" class="control-label">{{ $t('step1.education')
+                                            }} <b>*</b></label>
 
                                         <select id="education"
                                                 name="education"
@@ -302,7 +311,9 @@
                                     </div>
 
                                     <div :class="{'form-group': true, 'has-error': errors.has('form-2.employmentStatus') }">
-                                        <label for="employmentStatus" class="control-label">{{ $t('step1.employment_status') }} <b>*</b></label>
+                                        <label for="employmentStatus"
+                                               class="control-label">{{ $t('step1.employment_status')
+                                            }} <b>*</b></label>
 
                                         <select id="employmentStatus"
                                                 name="employmentStatus"
@@ -335,7 +346,7 @@
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     <a class="collapsed"
-                                       @click="validateForm2">
+                                       @click="validateForm2(3)">
                                         {{ $t('step1.basic_diagnosis') }}
                                     </a>
                                 </h4>
@@ -362,7 +373,8 @@
                                                    class="form-check"
                                                    @change="updateState">
 
-                                            <label for="assigned_disability_none">&nbsp;{{ $t('step1.assigned_disability_none') }}</label>
+                                            <label for="assigned_disability_none">&nbsp;{{ $t('step1.assigned_disability_none')
+                                                }}</label>
 
                                             <br>
 
@@ -373,7 +385,8 @@
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="assigned_disability_partial">{{ $t('step1.assigned_disability_partial') }}</label>
+                                            <label for="assigned_disability_partial">{{ $t('step1.assigned_disability_partial')
+                                                }}</label>
 
                                             <br>
 
@@ -384,7 +397,8 @@
                                                    class="form-check"
                                                    @change="updateState">&nbsp;
 
-                                            <label for="assigned_disability_full">{{ $t('step1.assigned_disability_full') }}</label>
+                                            <label for="assigned_disability_full">{{ $t('step1.assigned_disability_full')
+                                                }}</label>
                                         </div>
 
                                         <div class="col-md-4">
@@ -456,7 +470,9 @@
                        id="next-step"
                        class="btn btn-primary pull-right"
                        :value="$t('next')"
-                       @click="validateStep1">
+                       @click="nextStep">
+
+                {{ step }}
             </div>
         </div>
     </div>
@@ -470,7 +486,9 @@
 
     data () {
       return {
+        step: 1,
         formValid1: false,
+        formValid2: false,
         form1Error: false,
         form2Error: false
       }
@@ -513,6 +531,19 @@
     },
 
     methods: {
+      nextStep () {
+        if (this.step === 1) {
+          console.log('step1')
+          this.validateForm1()
+        } else if (this.step === 2) {
+          console.log('step2')
+          this.validateForm2()
+        } else if (this.step === 3) {
+          console.log('step3')
+          this.validateStep1()
+        }
+      },
+
       updateState (e) {
         this.$store.commit('updateState', {
           id: e.target.name,
@@ -520,21 +551,37 @@
         })
       },
 
-      validateForm1 () {
+      setStep (index) {
+        /* eslint-disable no-undef */
+        $('.collapse').collapse('hide')
+        $('#collapseOne').collapse('show')
+
+        this.step = index
+      },
+
+      validateForm1 (index) {
         this.$validator.validateAll('form-1').then(result => {
           /* eslint-disable no-undef */
           if (result) {
             $('.collapse').collapse('hide')
             $('#collapseTwo').collapse('show')
             this.formValid1 = true
+            this.form1Error = false
+
+            if (index) {
+              this.step = index
+            } else {
+              this.step++
+            }
           } else {
             $('#collapseOne').collapse('show')
             this.formValid1 = false
+            this.form1Error = true
           }
         })
       },
 
-      validateForm2 () {
+      validateForm2 (index) {
         if (!this.formValid1) {
           this.validateForm1()
         }
@@ -545,8 +592,16 @@
             if (result) {
               $('.collapse').collapse('hide')
               $('#collapseThree').collapse('show')
+              this.form2Error = false
+
+              if (index) {
+                this.step = index
+              } else {
+                this.step++
+              }
             } else {
               $('#collapseTwo').collapse('show')
+              this.form2Error = true
             }
           })
         }
