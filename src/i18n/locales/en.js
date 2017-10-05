@@ -120,6 +120,9 @@ export default {
   },
   step2: {
     choose: 'Choose components',
+    choose_component: 'Choose component',
+    choose_category: 'Choose category',
+    choose_subcategory: 'Choose subcategory',
     aasessed_components: 'Assessed components',
     components: [
       {

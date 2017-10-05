@@ -120,7 +120,10 @@ export default {
   },
   step2: {
     choose: 'Vyberte komponenty',
-    aasessed_components: 'Posudzované komponenty',
+    choose_component: 'Vyberte komponent',
+    choose_category: 'Vyberte kategoriu',
+    choose_subcategory: 'Choose subcategory',
+    aasessed_components: 'Vyberte subkategoriu',
     components: [
       {
         'TELESNÉ FUNKCIE': {

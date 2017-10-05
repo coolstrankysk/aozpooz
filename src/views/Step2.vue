@@ -31,32 +31,38 @@
                     </div>
 
                     <div id="components">
-                        <h3 v-if="selectedComponent.name">{{ selectedComponent.name }}</h3>
+                        <label>
+                            <h3>{{ $t('step2.choose_component') }}</h3>
 
-                        <select class="form-control form-group"
-                                @input="editComponent">
+                            <select class="form-control form-group"
+                                    @input="editComponent">
 
-                            <option value selected>{{ $t('step2.choose') }}</option>
+                                <option value selected>{{ $t('step2.choose') }}</option>
 
-                            <template v-for="(component, key) in $t('step2.components')[0]">
-                                <option v-if="selectedComponent.name"
-                                        :selected="selectedComponent.name == key">{{ key }}
-                                </option>
+                                <template v-for="(component, key) in $t('step2.components')[0]">
+                                    <option v-if="selectedComponent.name"
+                                            :selected="selectedComponent.name == key">{{ key }}
+                                    </option>
 
-                                <option v-else>{{ key }}</option>
-                            </template>
-                        </select>
+                                    <option v-else>{{ key }}</option>
+                                </template>
+                            </select>
+                        </label>
 
-                        <select class="form-control form-group component"
-                                v-for="components in selectedComponent.components"
-                                @input="editSelectedComponent">
+                        <label v-for="components in selectedComponent.components">
+                            <h3 v-if="components[Object.keys(components)[0]] instanceof Object">{{ $t('step2.choose_category') }}</h3>
+                            <h3 v-else>{{ $t('step2.choose_subcategory') }}</h3>
 
-                            <template v-for="(component, key) in components">
-                                <option v-if="component instanceof Object">{{ key }}</option>
+                            <select class="form-control form-group component"
+                                    @input="editSelectedComponent">
 
-                                <option v-else :value="key">{{ key }}: {{ component }}</option>
-                            </template>
-                        </select>
+                                <template v-for="(component, key) in components">
+                                    <option v-if="component instanceof Object">{{ key }}</option>
+
+                                    <option v-else :value="key">{{ key }}: {{ component }}</option>
+                                </template>
+                            </select>
+                        </label>
 
                         <div class="scales" v-if="showScales"
                              v-for="(scales, keys) in selectedComponent.scales">
@@ -189,6 +195,9 @@
     },
 
     methods: {
+      test () {
+        console.log('test')
+      },
       showSaveButton (e) {
         this.saveButton = true
 
@@ -349,5 +358,9 @@
 
     .scales {
         margin-bottom: 15px;
+    }
+
+    label {
+        width: 100%;
     }
 </style>
