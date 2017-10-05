@@ -64,7 +64,7 @@ export default {
     telephone_number_placeholder: 'Write telephone number',
     phone_number: 'Phone number',
     phone_number_placeholder: 'Write phone number',
-    additional_data: 'Additional data on the person under consideration',
+    additional_data: 'Additional patient information',
     marital_status: 'Marital status',
     marital_statuses: [
       {value: '', text: 'Choose marital status'},
