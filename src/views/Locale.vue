@@ -1,5 +1,7 @@
 <template>
     <div id="app">
+        <h1 class="text-center">{{ $t('icf_dial') }}</h1>
+
         <h1 class="text-center">Choose language / Vyberte jazyk</h1>
 
         <div class="animated fadeIn">
